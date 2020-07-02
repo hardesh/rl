@@ -1,6 +1,7 @@
 import numpy as np
 from copy import deepcopy
 
+# Env Parameters
 NUM_ROWS = 4
 NUM_COL = 4
 START_STATE = np.array((0, 0))
@@ -22,13 +23,14 @@ class GridWorldEnv:
         actions (dict): maps the actions to change in state after taking that action
         exp_rate (float): Exploration rate of the agent
         state (np.array): Position [x,y] of the agent in the gridworld
-        action (string)
+        action (string): An action from [up,down,left,right]
         grid (np.array): The environment
         action_num (int): Number of actions taken by the agent
     """
-    def __init__(self):
+
+    def __init__(self, exp_rate=EXP_RATE):
         self.actions = {"up": (0, -1), "down": (-1, 0), "left": (0, 1), "right": (1, 0)}
-        self.exp_rate = EXP_RATE
+        self.exp_rate = exp_rate
 
         self.state = np.array(START_STATE)
         self.action = ""
@@ -66,6 +68,7 @@ class GridWorldEnv:
         Args:
             action (str): A string which describes the action taken by the agent [up,down,left,right]
             update (bool): A boolean which decides whether to update the current state
+
         Returns:
             state (np.array): A state after after taking the given passed to this function
         """
