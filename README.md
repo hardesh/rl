@@ -1,6 +1,3 @@
-# Grid World Environment
+# My RL Implementations
 
-### TODO:
-- [x] Test the environment
-- [ ] Start working on the learning algorithm
-- [ ] Make APIs similar to openAI gym
+This repository has my implementations of different RL algorithms.
