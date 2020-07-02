@@ -103,6 +103,8 @@ class GridWorldEnv:
     def chooseAction(self):
         """
         Chooses the best action based on the exploration rate
+
+        This function should be in the learning algorithm
         """
         max_next_reward = 0
         action = ""
