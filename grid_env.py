@@ -31,11 +31,14 @@ class GridWorldEnv:
     def __init__(self, exp_rate=EXP_RATE):
         self.actions = {"up": (0, -1), "down": (-1, 0), "left": (0, 1), "right": (1, 0)}
         self.exp_rate = exp_rate
+        self.action_space = len(self.actions.keys())
 
         self.state = np.array(START_STATE)
         self.action = ""
         self.grid = np.zeros([NUM_COL, NUM_ROWS])
         self.action_num = 0
+
+        self.observation_space = self.grid.size
 
     def reset(self):
         """
@@ -46,13 +49,13 @@ class GridWorldEnv:
         self.grid = np.zeros([NUM_COL, NUM_ROWS])
         self.action_num = 0
 
-    def printGrid(self):
+    def render(self):
         """
         Prints the grid on the terminal
         """
         print("Present Grid: ")
         self.grid[self.state[0]][self.state[1]] = self.action_num
-        print(self.grid)
+        print(self.grid.T)
         print()
 
     def isInvalid(self, state):
@@ -121,9 +124,12 @@ class GridWorldEnv:
 
 if __name__ == "__main__":
     env = GridWorldEnv()
-    env.printGrid()
+    env.render()
     # print(env.getReward(env.state))
     for i in range(6):
         action = env.chooseAction()
         env.state = env.step(action, update=True)
-        env.printGrid()
+        env.render()
+
+    Q = np.zeros((env.observation_space, env.action_space))
+    print(np.argmax(Q[[0,0],:]))
